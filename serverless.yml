@@ -1,0 +1,29 @@
+service: mailer
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: eu-west-1
+
+custom:
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: true
+
+functions:
+  app:
+    handler: wsgi.handler
+    events:
+        - http: ANY /
+        - http: 'ANY {proxy+}'
+    environment:
+        MAILGUN_DOMAIN: ${ssm:mailgunDomain}
+        MAILGUN_KEY: ${ssm:mailgunKey}
+        MAILER_SUBJECT: ${ssm:mailerSubject}
+        MAILER_TO: ${ssm:mailerTo}
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
