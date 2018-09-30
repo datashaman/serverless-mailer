@@ -1,0 +1,5 @@
+{
+    "endpoint": "https://mailer.example.com/dev",
+    "redirect": "http://example.com",
+    "recaptchaSiteKey": "1234567890abcdefghijkl"
+}

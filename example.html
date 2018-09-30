@@ -1,8 +1,24 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        jQuery(function ($) {
+            $.getJSON('parameters.json', function (parameters) {
+                $('#form').attr('action', parameters.endpoint);
+                $('#redirect').attr('value', parameters.redirect);
+
+                if (parameters.recaptchaEnabled) {
+                    $('.g-recaptcha').attr('data-sitekey', parameters.recaptchaSiteKey);
+                    $.getScript('https://www.google.com/recaptcha/api.js');
+                }
+            });
+        });
+    </script>
+</head>
 <body>
-<form method="POST" action="http://mailer.example.com/dev">
-    <input type="hidden" name="redirect" value="http://example.com/thanks" />
+<form id="form" method="POST" action="">
+    <input id="redirect" type="hidden" name="redirect" value="" />
 
     <label for="name">Name</label><br />
     <input name="name" /><br />
@@ -14,7 +30,11 @@
     <textarea name="message">
     </textarea><br />
 
-    <input type="submit" />
+    <div class="g-recaptcha" data-sitekey=""></div>
+
+    <button type="submit">
+        Submit
+    </button>
 </form>
 </body>
 </html>

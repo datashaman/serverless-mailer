@@ -23,6 +23,7 @@ functions:
         MAILGUN_KEY: ${ssm:mailgunKey}
         MAILER_SUBJECT: ${ssm:mailerSubject}
         MAILER_TO: ${ssm:mailerTo}
+        RECAPTCHA_SECRET_KEY: ${ssm:recaptchaSecretKey}
 
 plugins:
   - serverless-python-requirements

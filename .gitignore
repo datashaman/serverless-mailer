@@ -21,3 +21,4 @@ var/
 
 .env
 node_modules/
+parameters.json
